@@ -2,9 +2,9 @@
 Taller 01 Java
 
 ##Integrantes del grupo##
-1. <Integrante  del grupo>
-2. <Integrante  del grupo>
-3. <Integrante  del grupo>
+1. HAUQUE, Federico Gabriel
+2. LOPEZ, Laureano Gonzalo  
+3. ZALAZAR, Ivan
 
 ###Tareas a realizar:###
 *	Clonar el repositorio github
