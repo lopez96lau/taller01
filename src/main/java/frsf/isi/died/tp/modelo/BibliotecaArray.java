@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
+import frsf.isi.died.tp.util.ListaServiceRadix;
+import frsf.isi.died.tp.util.ListasService;
 
 
 /**
@@ -34,7 +36,7 @@ public class BibliotecaArray implements Biblioteca{
 		cantidadMaterial=0;
 		this.materialCapacitacion= new MaterialCapacitacion[10];
 		//  13: inicializar la variable de tipo ListaService para que apunte el servicio de operaciones de listas		
-		servicio = new ListasService(materialCapacitacion);
+		servicio = new ListaServiceRadix(materialCapacitacion);
 	}
 
 	@Override
@@ -42,10 +44,9 @@ public class BibliotecaArray implements Biblioteca{
 		// 06: se agrega un material al arreglo de materiales de capacitacion si hay espacio en el arreglo
 		// caso contrario el metodo no agrega ningun elemento y termina su ejecución
 		
-		if ( this.materialCapacitacion[9] == null) {
-			int i = 0;
-			while( this.materialCapacitacion[i] != null ) i++;
-			this.materialCapacitacion[i] = material;
+		if ( cantidadMaterial < 10) {
+			this.materialCapacitacion[cantidadMaterial] = material;
+			cantidadMaterial++;
 		}
 		
 	}
@@ -88,13 +89,15 @@ public class BibliotecaArray implements Biblioteca{
 
 	@Override
 	public void imprimir() {		
-		//TODO 14: invocar al método imprimir de la variable de tipo ListaService para que imprima el arreglo 
+		//14: invocar al método imprimir de la variable de tipo ListaService para que imprima el arreglo 
+		servicio.imprimir();
 	}
 		
 
 	@Override
 	public void ordenarPorPrecio(Boolean b) {
-		// TODO 15: invocar al metodo ordenar de la variable de tipo ListaService para que ordene el arreglo 
+		// 15: invocar al metodo ordenar de la variable de tipo ListaService para que ordene el arreglo
+		servicio.ordenar();
 	}
 
 
