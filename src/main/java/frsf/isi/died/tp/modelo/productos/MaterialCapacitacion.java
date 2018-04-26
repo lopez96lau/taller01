@@ -75,6 +75,20 @@ public abstract class MaterialCapacitacion implements Ordenable {
 		return id;
 	}
 
+	public boolean equals(Object obj) {
+		if (obj instanceof MaterialCapacitacion) {
+			return (this.titulo.toLowerCase().equals(((MaterialCapacitacion) obj).getTitulo().toLowerCase()));
+		}else return false;
+	}
+	
+	public int compareTo(MaterialCapacitacion mat) {
+		int comp = this.titulo.compareTo(mat.getTitulo());
+		if(comp == 0) {
+			comp = this.precio().intValue() - mat.precio().intValue();
+		}
+		return comp;
+	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -95,6 +109,7 @@ public abstract class MaterialCapacitacion implements Ordenable {
 		this.costo = costo;
 	}
 
+	
 	/**
 	 * Retorna verdadero si es una instancia de libro, falso en caso contrario
 	 * @return
@@ -115,6 +130,8 @@ public abstract class MaterialCapacitacion implements Ordenable {
 	public String toString() {
 		return("[Titulo: "+this.titulo+" ; Precio: "+this.precio()+" ]");
 	}
+	
+	
 	
 	public final int valor() {
 		return (int)this.precio().intValue();

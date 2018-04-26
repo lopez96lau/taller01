@@ -43,6 +43,11 @@ public class Video extends MaterialCapacitacion {
 		
 	}
 	
+	public boolean equals(Object obj) {
+		if (obj instanceof Video) {
+			return (this.titulo.toLowerCase().equals(((Video) obj).getTitulo().toLowerCase()));
+		}else return false;
+	}
 	
 	public Video(Integer id, String titulo) {
 		this.id = id;

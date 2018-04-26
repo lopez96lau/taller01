@@ -92,6 +92,12 @@ public class Libro extends MaterialCapacitacion {
 	public Boolean esVideo() {
 		return false;
 	}
+	
+	public boolean equals(Object obj) {
+		if (obj instanceof Libro) {
+			return (this.titulo.toLowerCase().equals(((Libro) obj).getTitulo().toLowerCase()));
+		}else return false;
+	}
 
 	/**
 	 * El precio de un libro se calcula segun la siguiente formula
