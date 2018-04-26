@@ -34,7 +34,7 @@ public class BibliotecaArray implements Biblioteca{
 	
 	public BibliotecaArray() {
 		cantidadMaterial=0;
-		this.materialCapacitacion= new MaterialCapacitacion[10];
+		this.materialCapacitacion= new MaterialCapacitacion[5];
 		//  13: inicializar la variable de tipo ListaService para que apunte el servicio de operaciones de listas		
 		servicio = new ListaServiceRadix(materialCapacitacion);
 	}
@@ -44,7 +44,7 @@ public class BibliotecaArray implements Biblioteca{
 		// 06: se agrega un material al arreglo de materiales de capacitacion si hay espacio en el arreglo
 		// caso contrario el metodo no agrega ningun elemento y termina su ejecución
 		
-		if ( cantidadMaterial < 10) {
+		if ( cantidadMaterial < 5) {
 			this.materialCapacitacion[cantidadMaterial] = material;
 			cantidadMaterial++;
 		}
@@ -67,7 +67,7 @@ public class BibliotecaArray implements Biblioteca{
 		// No se puede usar para este método el operador "instanceOf" ni realizar ningun tipo de casting. 
 		
 		int k = 0;
-		for(int aux = 0 ; aux < 10 ; aux++) {
+		for(int aux = 0 ; aux < 5 ; aux++) {
 			if(this.materialCapacitacion[aux] != null && this.materialCapacitacion[aux].esLibro()) k++;
 		}
 		return k;
@@ -80,7 +80,7 @@ public class BibliotecaArray implements Biblioteca{
 		// No se puede usar para este método el operador "instanceOf" ni realizar ningun tipo de casting. 
 		int k = 0;
 		
-		for(int aux = 0 ; aux < 10 ; aux++) {
+		for(int aux = 0 ; aux < 5 ; aux++) {
 			if(this.materialCapacitacion[aux] != null && this.materialCapacitacion[aux].esVideo()) k++;
 		}
 		
