@@ -7,6 +7,7 @@ import java.util.Collections;
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
 import frsf.isi.died.tp.modelo.productos.Video;
+import frsf.isi.died.tp.util.MaterialNoEncontradoException;
 
 public class BibliotecaList implements Biblioteca {
 
@@ -70,14 +71,20 @@ public class BibliotecaList implements Biblioteca {
 
 	}
 	@Override
-	public MaterialCapacitacion buscar(Integer precio) {
+	public MaterialCapacitacion buscar(Integer precio) throws MaterialNoEncontradoException {
 		Collections.sort(this.materiales, (m1, m2) ->  m1.getCosto().intValue() - m2.getCosto().intValue());
-		return buscadorBinario (0, this.materiales.size(), precio);
+		return buscadorBinario (0, this.materiales.size()-1, precio);
 		}
 
-	private MaterialCapacitacion buscadorBinario(Integer i,Integer f, Integer c){
-		int centro = i+f/2;
-		if (this.materiales.get(centro).getCosto().intValue() == c.intValue()){
+	private MaterialCapacitacion buscadorBinario(Integer i,Integer f, Integer c) throws MaterialNoEncontradoException{
+		int centro = (i+f)/2;
+		if (i==f) {
+			if(this.materiales.get(i).getCosto().intValue() == c.intValue()) {
+				return this.materiales.get(i);
+			}else {
+				throw new MaterialNoEncontradoException();
+			}
+		}else if (this.materiales.get(centro).getCosto().intValue() == c.intValue()){
 			return this.materiales.get(centro);
 		}else if (this.materiales.get(centro).getCosto().intValue() > c.intValue()) {
 			return buscadorBinario(i, centro-1, c);
