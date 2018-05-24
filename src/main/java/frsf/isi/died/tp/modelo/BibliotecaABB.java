@@ -28,6 +28,9 @@ public class BibliotecaABB implements Biblioteca {
 			if(materiales.tamanio()<10)this.materiales.add(material);
 		}
 	}
+	public Arbol getArbol() {
+		return materiales;
+	}
 
 	@Override
 	public Integer cantidadMateriales() {
