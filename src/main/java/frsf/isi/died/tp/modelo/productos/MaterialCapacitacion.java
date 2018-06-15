@@ -75,12 +75,38 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		return id;
 	}
 
-	public boolean equals(Object obj) {
-		if (obj instanceof MaterialCapacitacion) {
-			return (this.titulo.toLowerCase().equals(((MaterialCapacitacion) obj).getTitulo().toLowerCase()));
-		}else return false;
-	}
+//	public boolean equals(Object obj) {
+//		if (obj instanceof MaterialCapacitacion) {
+//			return (this.titulo.toLowerCase().equals(((MaterialCapacitacion) obj).getTitulo().toLowerCase()));
+//		}else return false;
+//	}
 	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MaterialCapacitacion other = (MaterialCapacitacion) obj;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		return true;
+	}
+
 	public int compareTo(MaterialCapacitacion mat) {
 		int comp = this.titulo.compareTo(mat.getTitulo());
 		if(comp == 0) {
@@ -141,5 +167,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		 * implementado en cada hijo se llama, invocando a la funcion correspondiente de cada instancia no abstracta.
 		 */
 	}
+	
+	
 
 }
