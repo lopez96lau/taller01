@@ -222,18 +222,25 @@ public class Grafo<T> {
         ArrayList<T> resultado = new ArrayList<>();
         if (saltos.equals(1)) {
         	for(Arista<T> a: aristas) {
-            	if(a.getInicio().equals(n1) && a.getFin().equals(n2)) {
-            		//Aca lo encontró
+            	if(a!=null && a.getInicio().equals(n1) && a.getFin().equals(n2)) {
+            		resultado.add(n1.getValor());
+            		resultado.add(n2.getValor());
+            		System.out.println("conexion final: "+ resultado);
             	}
         	}
         }else{
         	List<Vertice<T>> adyacentes = this.getAdyacentes(n1);
-        	visitados.add(n1);
         	for(Vertice<T> v: adyacentes) {
-        		buscarCaminoNSaltos(v, n2, saltos-1, visitados);
+        		List<T> temp = buscarCaminoNSaltos(v, n2, saltos-1, visitados);
+        		if(v!= null && temp.size()>0 && !visitados.contains(v)) {
+        			resultado.add(n1.getValor());
+        			System.out.println("conexion parcial agregada: "+ resultado);
+        			resultado.addAll(temp);
+        			System.out.println("conexion parcial total: "+ resultado);
+
+        		}
         	}
         }
-        	
         return resultado;
     }
 }
