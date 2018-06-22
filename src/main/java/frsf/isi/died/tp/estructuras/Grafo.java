@@ -225,7 +225,6 @@ public class Grafo<T> {
             	if(a!=null && a.getInicio().equals(n1) && a.getFin().equals(n2)) {
             		resultado.add(n1.getValor());
             		resultado.add(n2.getValor());
-            		System.out.println("conexion final: "+ resultado);
             	}
         	}
         }else{
@@ -234,9 +233,7 @@ public class Grafo<T> {
         		List<T> temp = buscarCaminoNSaltos(v, n2, saltos-1, visitados);
         		if(v!= null && temp.size()>0 && !visitados.contains(v)) {
         			resultado.add(n1.getValor());
-        			System.out.println("conexion parcial agregada: "+ resultado);
         			resultado.addAll(temp);
-        			System.out.println("conexion parcial total: "+ resultado);
 
         		}
         	}
