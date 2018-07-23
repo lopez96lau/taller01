@@ -4,6 +4,7 @@
 package frsf.isi.died.tp.modelo.productos;
 
 import java.lang.Object.*;
+import java.util.Date;
 
 /**
  * @author laureano
@@ -54,16 +55,12 @@ public class Video extends MaterialCapacitacion {
 		this.titulo = titulo;
 	}
 	
-	public Video(Integer id, String titulo, Double costo) {
-		this.id = id;
-		this.titulo = titulo;
-		this.costo = costo;
+	public Video(Integer id, String titulo, Double costo, Integer calificacion, Date fechaPublicacion, Relevancia relevancia) {
+		super(id, titulo, costo, calificacion, fechaPublicacion, relevancia);
 	}
 	
-	public Video(Integer id, String titulo, Double costo, Integer duracion) {
-		this.id = id;
-		this.titulo = titulo;
-		this.costo = costo;
+	public Video(Integer id, String titulo, Double costo, Integer duracion, Integer calificacion, Date fechaPublicacion, Relevancia relevancia) {
+		super(id, titulo, costo, calificacion, fechaPublicacion, relevancia);
 		this.duracion = duracion;
 	}
 	

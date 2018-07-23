@@ -6,6 +6,7 @@
 package frsf.isi.died.tp.modelo.productos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import frsf.isi.died.tp.util.Ordenable;
 
@@ -26,13 +27,12 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	 * portal
 	 */
 	protected Double costo;
+	protected Integer calificacion;
+	protected Date fechaPublicacion;
+	protected Relevancia relevancia;
 	
-
-	/**
-	 * Constructor por defecto
-	 */
 	public MaterialCapacitacion() {
-		this(0,"en desarrollo",0.0);
+		this(0,"en desarrollo",0.0,0,null,null);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	 * @param titulo
 	 */
 	public MaterialCapacitacion(Integer id, String titulo) {
-		this(id,titulo,0.0);
+		this(id,titulo,0.0,0,null,null);
 	}
 
 	/**
@@ -51,10 +51,13 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	 * @param id
 	 * @param titulo
 	 */
-	public MaterialCapacitacion(Integer id,String titulo, Double costo) {
+	public MaterialCapacitacion(Integer id,String titulo, Double costo, Integer calificacion, Date fechaPublicacion, Relevancia relevancia) {
 		this.id =id;
 		this.titulo = titulo;
 		this.costo = costo;
+		this.calificacion = calificacion;
+		this.fechaPublicacion = fechaPublicacion;
+		this.relevancia = relevancia;
 	}
 
 	/**
@@ -129,6 +132,30 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 
 	public Double getCosto() {
 		return costo;
+	}
+
+	public Integer getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Integer calificacion) {
+		this.calificacion = calificacion;
+	}
+
+	public Date getFechaPublicacion() {
+		return fechaPublicacion;
+	}
+
+	public void setFechaPublicacion(Date fechaPublicacion) {
+		this.fechaPublicacion = fechaPublicacion;
+	}
+
+	public Relevancia getRelevancia() {
+		return relevancia;
+	}
+
+	public void setRelevancia(Relevancia relevancia) {
+		this.relevancia = relevancia;
 	}
 
 	public void setCosto(Double costo) {

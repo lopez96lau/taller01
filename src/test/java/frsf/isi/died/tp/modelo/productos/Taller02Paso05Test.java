@@ -2,15 +2,20 @@ package frsf.isi.died.tp.modelo.productos;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.modelo.BibliotecaList;
+import frsf.isi.died.tp.modelo.Orden;
 
 public class Taller02Paso05Test {
 	
-	Biblioteca biblioteca;
+	BibliotecaList biblioteca;
 	Libro m1;
 	Libro m2;
 	Libro m3;
@@ -23,14 +28,14 @@ public class Taller02Paso05Test {
 	@Before
 	public void init() {
 		biblioteca=new BibliotecaList();
-		m1 = new Libro(1, "Libro 1", 100.0, 1.0, 10);
-		m2 = new Libro(2, "Libro 2", 50.0, 1.0, 10);
-		m3 = new Libro(3, "Libro 3", 150.0, 1.0, 10);
-		m4 = new Libro(4, "Libro 4", 175.0, 1.0, 10);
-		m5 = new Video(5, "Video 1", 75.0,1);
-		m6 = new Video(6, "Video 2", 25.0,1);
-		m7 = new Video(7, "Video 3", 275.0,1);
-		m8 = new Video(8, "Video 4", 145.0,1);
+		m1 = new Libro(1, "Libro 1", 100.0, 1.0, 10, 10, new Date(2017,12,13), Relevancia.ALTA);
+		m2 = new Libro(2, "Libro 2", 50.0, 1.0, 10, 20, new Date(2016,12,13), Relevancia.BAJA);
+		m3 = new Libro(3, "Libro 3", 150.0, 1.0, 10, 30, new Date(2019,12,13), Relevancia.MEDIA);
+		m4 = new Libro(4, "Libro 4", 175.0, 1.0, 10, 50, new Date(2020,12,13), Relevancia.MEDIA);
+		m5 = new Video(5, "Video 1", 75.0,1, 12, new Date(2014,12,13), Relevancia.ALTA);
+		m6 = new Video(6, "Video 2", 25.0,1, 73, new Date(2019,8,10), Relevancia.BAJA);
+		m7 = new Video(7, "Video 3", 275.0,1, 97, new Date(2012,9,5), Relevancia.MEDIA);
+		m8 = new Video(8, "Video 4", 145.0,1, 62, new Date(2016,8,16), Relevancia.BAJA);
 	}
 	
 	@Test(expected=RuntimeException.class)
@@ -51,7 +56,7 @@ public class Taller02Paso05Test {
 		MaterialCapacitacion encontrado = biblioteca.buscar(100);
 	}
 
-	@Test(expected=RuntimeException.class)
+	@Test
 	public void noEncuentraN7() {
 		biblioteca.agregar(m1);
 		biblioteca.agregar(m2);
@@ -60,7 +65,11 @@ public class Taller02Paso05Test {
 		biblioteca.agregar(m5);
 		biblioteca.agregar(m6);
 		biblioteca.agregar(m7);
-		MaterialCapacitacion encontrado = biblioteca.buscar(568);
+		biblioteca.agregar(m8);
+		Collection<MaterialCapacitacion> a = biblioteca.buscar("Libro 1", null, null, null);
+		ArrayList<MaterialCapacitacion> trie = biblioteca.ordenar(Orden.FECHA);
+		System.out.println(trie);
+		System.out.println(a);
 	}
 	
 	@Test

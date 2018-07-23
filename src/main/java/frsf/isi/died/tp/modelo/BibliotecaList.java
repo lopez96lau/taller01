@@ -3,9 +3,11 @@ package frsf.isi.died.tp.modelo;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 import frsf.isi.died.tp.modelo.productos.Libro;
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
+import frsf.isi.died.tp.modelo.productos.Relevancia;
 import frsf.isi.died.tp.modelo.productos.Video;
 import frsf.isi.died.tp.util.MaterialNoEncontradoException;
 
@@ -91,5 +93,36 @@ public class BibliotecaList implements Biblioteca {
 		}else {
 			return buscadorBinario(centro+1, f, c);
 		}
+	}
+	
+	//BUSQUEDA POR TITULO, CALIFICACION Y FECHA ---------- LO DEL TEMA NO ESTA EN NINGUN LADO
+	
+	public ArrayList<MaterialCapacitacion> buscar (String titulo, Integer calificacion, Date fechaDesde, Date fechaHasta){
+		ArrayList<MaterialCapacitacion> mats = (ArrayList<MaterialCapacitacion>)(this.materiales.clone());
+		if (titulo != null )
+			mats.removeIf(e -> (!e.getTitulo().equals(titulo)));
+		if (calificacion != null) {
+			mats.removeIf(e -> (!e.getCalificacion().equals(calificacion)));
+		}
+		if(fechaDesde != null) {
+			mats.removeIf(e -> (e.getFechaPublicacion().before(fechaDesde)));
+		}
+		if(fechaHasta != null) {
+			mats.removeIf(e -> (e.getFechaPublicacion().after(fechaHasta)));
+		}
+		return mats;
+	}
+	
+	// TODO ORDENAMIENTO DE LA LISTA.
+	public ArrayList<MaterialCapacitacion> ordenar (Orden ord){
+		ArrayList<MaterialCapacitacion> mats = (ArrayList<MaterialCapacitacion>)(this.materiales.clone());
+		switch(ord) {
+			case ALFABETICO: Collections.sort(mats, (a, b) -> a.getTitulo().compareToIgnoreCase(b.getTitulo())); break;
+			case PRECIO: Collections.sort(mats, (a, b) -> a.precio() < b.precio() ? -1 : a.precio() == b.precio() ? 0 : 1); break;
+			case CALIFICACION: Collections.sort(mats, (a, b) -> a.getCalificacion() < b.getCalificacion() ? -1 : a.getCalificacion() == b.getCalificacion() ? 0 : 1); break;
+			case FECHA: Collections.sort(mats, (a, b) -> a.getFechaPublicacion().before(b.getFechaPublicacion()) ? -1 : a.getFechaPublicacion().equals(b.getFechaPublicacion()) ? 0 : 1); break;
+			case REELEVANCIA: Collections.sort(mats, (a, b) -> a.getRelevancia().equals(b.getRelevancia()) ? 0 : a.getRelevancia() == Relevancia.ALTA ? 1 : b.getRelevancia() == Relevancia.ALTA ? -1 : a.getRelevancia() == Relevancia.BAJA ? -1 : 1); break;
+		}
+		return mats;
 	}
 }
